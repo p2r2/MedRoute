@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedRoute AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Login View -->
+    <div id="login-view" class="view-container">
+        <div class="login-card">
+            <div class="logo-container">
+                <img src="logo.png" alt="MedRoute Logo" class="logo-large">
+            </div>
+            <h2>MedRoute</h2>
+            <p class="subtitle">AI Medical Assistant Platform</p>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="doctor@hospital.com" value="demo@medroute.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="........" value="demo123456">
+            </div>
+
+            <button id="login-btn" onclick="handleLogin()">Sign In</button>
+
+            <div class="divider">OR</div>
+
+            <button class="secondary-btn" onclick="handleLogin()">Try Demo Login</button>
+
+            <div class="demo-credentials">
+                Demo Credentials:<br>
+                <span class="highlight">demo@medroute.com</span> / <span>demo123456</span>
+            </div>
+
+            <a href="#" class="link">Need an account? Sign up</a>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-view" class="view-container hidden">
+        <nav class="top-bar">
+            <div class="nav-left">
+                <img src="logo.png" alt="Logo" class="nav-logo">
+                <span class="nav-title">MedRoute <small>AI Medical Assistant</small></span>
+            </div>
+            <button class="outline-btn" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </nav>
+
+        <div class="patient-bar">
+            <div class="patient-selector">
+                <i class="fas fa-user-circle"></i>
+                <select id="patient-select">
+                    <option value="">Select a patient...</option>
+                    <option value="John Doe, 45M">John Doe, 45M - Hypertension</option>
+                    <option value="Jane Smith, 32F">Jane Smith, 32F - Diabetes T2</option>
+                    <option value="Robert Brown, 60M">Robert Brown, 60M - Post-op Recovery</option>
+                </select>
+            </div>
+            <button class="outline-btn small" onclick="openAddPatientModal()"><i class="fas fa-plus"></i> Add
+                Patient</button>
+        </div>
+
+        <main class="chat-area">
+            <div id="empty-state" class="empty-state">
+                <div class="logo-placeholder">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                <h3>Select a patient to begin</h3>
+                <p>Choose a task type and start documenting with voice or text</p>
+            </div>
+
+            <div id="chat-history" class="chat-history hidden">
+                <!-- Chat messages will appear here -->
+            </div>
+        </main>
+
+        <footer class="input-area">
+
+            <div class="sample-queries-container">
+                <select id="sample-query-dropdown" onchange="useSampleQuery(this.value)">
+                    <option value="">Select a sample query...</option>
+                    <option value="Draft a referral letter for a Cardiologist">Draft Referral</option>
+                    <option value="Check recent blood test results">Check Lab Results</option>
+                    <option value="Generate CPT codes for consultation">Billing Codes</option>
+                    <option value="Automate filling the insurance form">Automate Form</option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <textarea id="user-text" placeholder="Describe the medical task or speak..."></textarea>
+                <div class="action-buttons">
+                    <button id="mic-btn" class="icon-btn" onclick="toggleRecording()"><i
+                            class="fas fa-microphone"></i></button>
+                    <button class="icon-btn primary" onclick="submitTextQuery()"><i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Add Patient Modal -->
+    <div id="add-patient-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Patient</h3>
+                <span class="close-btn" onclick="closeAddPatientModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="p-name">Patient Name</label>
+                    <input type="text" id="p-name" placeholder="e.g. Rohit Singh">
+                </div>
+                <div class="form-group">
+                    <label for="p-details">Age & Gender</label>
+                    <input type="text" id="p-details" placeholder="e.g. 25M">
+                </div>
+                <div class="form-group">
+                    <label for="p-condition">Medical Condition</label>
+                    <input type="text" id="p-condition" placeholder="e.g. Flu, Post-op">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeAddPatientModal()">Cancel</button>
+                <button class="primary-btn" onclick="savePatient()">Save Patient</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

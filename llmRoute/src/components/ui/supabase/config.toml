@@ -1,0 +1,7 @@
+project_id = "yebiwijdswcsnoyradin"
+
+[functions.transcribe-audio]
+verify_jwt = true
+
+[functions.route-medical-task]
+verify_jwt = true
